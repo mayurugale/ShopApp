@@ -1,0 +1,51 @@
+
+<div class="login-page">
+
+<div class="carddet">
+<mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Login Page</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="example-form" [formGroup]="login" (ngSubmit)="userLogin()">
+            <mat-form-field class="example-full-width">
+              <mat-label>User Name</mat-label>
+              <input matInput placeholder="Enter user Name" formControlName="username">
+              <mat-error *ngIf="f['username']?.hasError('required')">User Name is required</mat-error>
+            </mat-form-field>
+          
+            <mat-form-field appearance="fill" class="example-full-width">
+                <mat-label>Password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" formControlName="pass">
+                <mat-error *ngIf="f['pass']?.hasError('required')">Password is required</mat-error>
+                <mat-error *ngIf="f['pass']?.hasError('pattern')"> Password must have 1 uppercase, 1 lowercase, 1 special character, 1 number, and be 8+ characters long.
+                </mat-error>
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+              </mat-form-field>
+
+              <mat-card-actions>
+            <button class="example-full-width" mat-raised-button color="primary" [disabled]="login.invalid">Login</button>
+              </mat-card-actions>
+              <mat-card-actions>
+                <div class="Sign">
+                <span>Don't have an account ? </span> <a href="#"> Sign up</a>
+                  </div>
+              </mat-card-actions>
+          </form>
+          <!-- <ngx-spinner
+          bdColor="rgba(51,51,51,0.8)"
+          size="medium"
+          color="#fff"
+          type="ball-scale-multiple"
+        >
+          <p style="font-size: 20px; color: white">Loading...</p>
+        </ngx-spinner>           -->
+      
+      </mat-card-content>
+    
+  </mat-card>
+  
+  </div>
+  </div>
