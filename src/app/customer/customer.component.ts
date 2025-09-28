@@ -34,7 +34,7 @@ export class CustomerComponent {
     
     //alert('spinner')
   
-      this.common.getUser().subscribe((res:any)=>{
+      this.common.getCustomers().subscribe((res:any)=>{
 
         this.dataSource=res;
         console.log(this.dataSource)

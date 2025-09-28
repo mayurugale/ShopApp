@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { CommonService } from '../service/common.service';
 
 
 @Component({
@@ -13,14 +14,21 @@ export class LoginComponent {
 
   login:FormGroup
   hide = true;
+  loading = false;
+  errorMessage = '';
 
 
-  constructor(public fb:FormBuilder,public router:Router,public spinner:NgxSpinnerService){
+  constructor(
+    public fb:FormBuilder,
+    public router:Router,
+    public spinner:NgxSpinnerService,
+    private CommonService:CommonService
+  ){
 
     this.login=this.fb.group({
 
-      username:['',Validators.required],
-      pass:['',[Validators.required]]
+      email:['',Validators.required],
+      password:['',[Validators.required]]
 
     })
   }
@@ -32,18 +40,42 @@ export class LoginComponent {
   }
 
   userLogin(){
+    if (this.login.invalid) {
+      return;
+    }
 
-   const username=this.login.get('username')?.value
-   const pass=this.login.get('pass')?.value
+    this.loading = true;
+    this.errorMessage = '';
 
-   if(username=='mayur' && pass=='789'){
+    const { email, password } = this.login.value;
 
-    //alert('login Succesfully')
-    sessionStorage.setItem('username',username);
-    sessionStorage.setItem('password',pass)
-       this.router.navigate(['/'])
+    this.CommonService.login(email, password).subscribe({
+      next: (res) => {
+        this.loading = false;
+        this.router.navigate(['/'])
+        console.log('Login success:', res);
+        console.log('Stored token:', this.CommonService.getToken());
+        // 👉 You can navigate to dashboard after login
+        // this.router.navigate(['/dashboard']);
+      },
+      error: (err) => {
+        this.loading = false;
+        this.errorMessage = err.error?.message || 'Login failed. Please try again.';
+        console.error('Login error:', err);
+      }
+    });
 
-    //this.spinner.show()
+  //  const username=this.login.get('username')?.value
+  //  const pass=this.login.get('pass')?.value
+
+  //  if(username=='mayur' && pass=='789'){
+
+  //   //alert('login Succesfully')
+  //   sessionStorage.setItem('username',username);
+  //   sessionStorage.setItem('password',pass)
+  //      this.router.navigate(['/'])
+
+  //   //this.spinner.show()
 
     // setTimeout(() => {
       
@@ -58,11 +90,11 @@ export class LoginComponent {
     //   // sessionStorage.removeItem(pass)
     // }, 10000);
 
-   }else{
+  //  }else{
 
-    alert('Username & Password not matched')
+  //   alert('Username & Password not matched')
 
-   }
+  //  }
 
     console.log(this.login.value)
 

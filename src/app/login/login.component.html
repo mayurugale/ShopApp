@@ -10,15 +10,15 @@
         <form class="example-form" [formGroup]="login" (ngSubmit)="userLogin()">
             <mat-form-field class="example-full-width">
               <mat-label>User Name</mat-label>
-              <input matInput placeholder="Enter user Name" formControlName="username">
-              <mat-error *ngIf="f['username']?.hasError('required')">User Name is required</mat-error>
+              <input matInput placeholder="Enter user Name" formControlName="email">
+              <mat-error *ngIf="f['email']?.hasError('required')">User Name is required</mat-error>
             </mat-form-field>
           
             <mat-form-field appearance="fill" class="example-full-width">
                 <mat-label>Password</mat-label>
-                <input matInput [type]="hide ? 'password' : 'text'" formControlName="pass">
-                <mat-error *ngIf="f['pass']?.hasError('required')">Password is required</mat-error>
-                <mat-error *ngIf="f['pass']?.hasError('pattern')"> Password must have 1 uppercase, 1 lowercase, 1 special character, 1 number, and be 8+ characters long.
+                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                <mat-error *ngIf="f['password']?.hasError('required')">Password is required</mat-error>
+                <mat-error *ngIf="f['password']?.hasError('pattern')"> Password must have 1 uppercase, 1 lowercase, 1 special character, 1 number, and be 8+ characters long.
                 </mat-error>
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                   <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
