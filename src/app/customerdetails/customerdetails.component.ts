@@ -5,7 +5,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CustomerComponent } from '../customer/customer.component';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
-import { CommonService } from '../service/common.service';
+import { CommonService } from '../services/common.service';
 
 @Component({
   selector: 'app-customerdetails',

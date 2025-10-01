@@ -7,7 +7,7 @@ import { CustomerdetailsComponent } from '../customerdetails/customerdetails.com
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { CommonService } from '../service/common.service';
+import { CommonService } from '../services/common.service';
 
 
 export interface UserData {

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { CommonService } from '../service/common.service';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -22,7 +22,7 @@ export class LoginComponent {
     public fb:FormBuilder,
     public router:Router,
     public spinner:NgxSpinnerService,
-    private CommonService:CommonService
+    private AuthService:AuthService
   ){
 
     this.login=this.fb.group({
@@ -35,7 +35,6 @@ export class LoginComponent {
 
 
   get f(){
-
     return this.login.controls
   }
 
@@ -49,12 +48,12 @@ export class LoginComponent {
 
     const { email, password } = this.login.value;
 
-    this.CommonService.login(email, password).subscribe({
+    this.AuthService.login(email, password).subscribe({
       next: (res) => {
         this.loading = false;
         this.router.navigate(['/'])
         console.log('Login success:', res);
-        console.log('Stored token:', this.CommonService.getToken());
+        console.log('Stored token:', this.AuthService.getToken());
         // 👉 You can navigate to dashboard after login
         // this.router.navigate(['/dashboard']);
       },
